@@ -1,0 +1,13 @@
+<div class="container text-center">
+    <h2>商品名: <%= @product.name %></h2>
+    <p><%= image_tag @product.image.url,:height =>'230'%></p>
+    <h4>価格: <%= @product.price %>円</h4>
+    <p>商品説明: <%= @product.description %></p>
+    <div>
+    <% if logged_in? %>
+    <%= link_to 'カートへ入れる',carts_create_path(product_id: @product), method: :post, class: 'btn btn-success' %>
+    <% end %>
+    </div>
+    <%= link_to '商品一覧へ', root_path %>
+
+</div>

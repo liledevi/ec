@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>アカウント一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>メールアドレス</th>
+      <th>プロフィール画像</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.emai %></td>
+        <td><%= image_tag user.image.url,:width => '90' %></td>
+        <td><%= link_to '個別ページ', user %></td>
+        <td><%= link_to '情報を編集する', edit_user_path(user) %></td>
+        <td><%= link_to 'アカウントを消す', user, method: :delete, data: { confirm: '本当に消してもおｋ？' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

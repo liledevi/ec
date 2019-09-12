@@ -1,0 +1,34 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>名前</strong>
+  <%= current_user.name %>
+</p>
+
+<p>
+  <strong>メールアドレス</strong>
+  <%= current_user.emai %>
+</p>
+
+<p>
+  <strong>プロフィール画像</strong>
+  <div><%= image_tag current_user.image.url,:width => '200' %></div>
+</p>
+<p>
+  <strong>購入履歴</strong>
+  <div class="row">
+    <% current_user.purchase_histories.each do |purchase_history| %>
+      <div class="col-md-2">
+        <small><%= purchase_history.product.created_at %></small>
+        <p><%= purchase_history.product.name %></p>
+        <%= image_tag purchase_history.product.image.url,:height => '120'%>
+        <p><%= purchase_history.product.price %>円</p>
+      </div>
+    <% end %>
+  </div>
+</p>
+</div>
+<%= link_to '情報を編集する', edit_user_path(current_user) %> |
+<%= link_to 'アカウント一覧', users_path %>
+

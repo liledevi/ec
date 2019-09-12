@@ -1,0 +1,15 @@
+<div class="container text-center">
+  <h1>商品一覧</h1>
+  
+  <div class="row">
+　  <% @products.each do |product| %>
+      <div class="col-md-3">
+        <%= link_to product_path(product.id) do %>
+          <h4><%= product.name %></h4>
+          <p><%= image_tag product.image.url,:height =>'230'%></p>
+          <p><%= product.price %><span> 円</span></p>
+        <% end %>
+      </div>
+　  <% end %>
+　</div>
+</div>

@@ -1,0 +1,36 @@
+<h1>ダッシュボード</h1>
+
+<h3>全体売上</h3>
+  <% sum = 0 %>
+  <% @purchase_histories.each do |history| %>
+    <% sum += history.product.price %>
+  <% end %>
+  <b><%= sum %>円</b>
+  <span><%= link_to '詳細', admins_all_path %></span>
+  
+<h3>今月の売上</h3>
+  <% sum = 0 %>
+  <% @month_purchase_histories.each do |history| %>
+    <% sum += history.product.price %>
+  <% end %>
+  <b><%= sum %>円</b>
+  <span><%= link_to '詳細', admins_month_path %></span>
+
+<h3>購入履歴</h3>
+  <div class="col-md-6">
+    <table border="1">
+      <th>ユーザー</th>
+      <th>日時</th>
+      <th>商品名</th>
+      <th>単価</th>
+      <% @purchase_histories.each do |history| %>
+      <tr>
+        <td><%= history.user.name %></td>
+        <td><%= history.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分%-S秒") %></td>
+        <td><%= history.product.name %> </td>
+        <td><%= history.product.price %> </td>
+      </tr>
+      <% end %>
+  </table>
+</div>
+

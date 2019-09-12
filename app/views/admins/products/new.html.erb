@@ -1,0 +1,24 @@
+<div class="container">
+<h1>新規商品登録</h1>
+  <%= form_for :product, url: admins_products_path do |f| %>
+    <div>
+      <%= f.label :名前 %>
+      <%= f.text_field :name%>
+    </div>
+     <div>
+      <%= f.label :画像 %>
+      <%= f.file_field :image%>
+    </div>
+    <div>
+      <%= f.label :値段 %>
+      <%= f.text_field :price%><span> 円</span>
+    </div>
+    <div>
+      <%= f.label :説明 %>
+      <%= f.text_area :description, :size=>"30x5"%>
+    </div>
+      <%= f.submit '登録'%>
+  <% end %>
+  <%= link_to '商品一覧へ', root_path %>
+</div>
+

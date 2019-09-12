@@ -1,0 +1,11 @@
+<h3>今月の売上詳細</h3>
+  <div class="row">
+　  <% @month_products.each do |product| %>
+      <div class="col-md-3">
+          <h4><%= product.name %></h4>
+          <p><%= product.price %><span>円</span></p>
+          <p><%= product.purchase_histories.where(created_at: Time.now.all_month).count %>個</p>
+          <p>総売上: <%= product.price * product.purchase_histories.where(created_at: Time.now.all_month).count %>円</p>
+      </div>
+　  <% end %>
+　</div>

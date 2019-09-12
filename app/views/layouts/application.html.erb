@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ec</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>" role="alert"><%= value %></div>
+    <% end %>
+    
+    <nav class="navbar navbar-default ">
+      <div class="container">
+        <ul class="nav navbar-nav navbar-right">
+          <% if logged_in? %>
+            <li class="nav-item">
+              <%= link_to '商品一覧', root_path %>
+            </li>
+            <li class="nav-item">  
+              <%= link_to 'ログアウト', sessions_destroy_path, method: :delete %>
+            </li>
+            <li class="nav-item"> 
+              <%= link_to 'カートへ', carts_show_path %>
+            </li>
+          <% elsif logged_in_admin? %>
+            <li>
+              <%= link_to '新規商品登録へ', new_admins_product_path %>
+            </li>
+            <li>
+              <%= link_to 'ログアウト(管理者)', sessions_destroy_admin_path, method: :delete %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'ログイン', sessions_new_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to '新規登録', new_user_path %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    
+    <%= yield %>
+    
+    <script>
+      $(function(){
+        $(".alert").fadeOut(5000);
+      });
+    </script>
+  </body>
+</html>

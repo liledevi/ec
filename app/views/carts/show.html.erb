@@ -1,0 +1,30 @@
+<div class="container text-center">
+  <h1>カートの中身</h1>
+  <% @products_in_cart.each do |product| %>
+    <div class="col-md-3">
+      <h4><%= product.name %></h4>
+      <p><%= image_tag product.image.url,:height =>'230'%></p>
+      <p><%= product.price %><span> 円</span></p>
+      <%= link_to '削除',carts_destroy_path(product_id: product), method: :delete, data: {confirm: '削除してもいいですか？'} , class: 'btn btn-success btn-sm' %>
+    </div>
+  <% end %>
+  <h4>合計金額 <%= @total_price %> 円</h4>
+  <form action='<%= charges_create_path %>' method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= ENV['STRIPE_API_KEY'] %>"
+    data-amount="<%= @total_price %>"
+    data-name="商品の購入"
+    data-description="クレジットカード決済"
+    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-locale="auto"
+    data-currency="JPY">
+  </script>
+  
+    <% @products_in_cart.each do |product| %>
+     <input type='hidden' name='product_ids[]' value="<%= product.id %>">
+    <% end %>
+</form>
+  <%= link_to 'ショッピングを続ける♪', root_path, class: 'btn btn-warning btn-lg' %>
+</div>
+
